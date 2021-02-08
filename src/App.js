@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className="App">
-      <Setting setName={setName} setPic={setPic} />
       <Chat name={name} pic={pic} />
+      <Setting setName={setName} setPic={setPic} />
     </div>
   );
 }
