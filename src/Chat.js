@@ -80,9 +80,20 @@ function Chat(props) {
       </ul>
 
       <form className="send">
-        <input type="checkbox" onClick={handleSender} />
-        <input type="text" name="talk" onChange={(e) => setNewTalk(e.target.value)} />
-        <input type="submit" onClick={handleSubmit} />
+
+        {/* sender 셋팅, 사진 업로드 기능 */}
+        <div className="send_setting">
+          <label className="toggle">
+            <input type="checkbox" onClick={handleSender} />
+            <span className="slider"></span>
+          </label>
+        </div>
+
+        {/* 글 작성, 전송 버튼 */}
+        <div className="send_write">
+          <textarea type="text" name="talk" onChange={(e) => setNewTalk(e.target.value)} />
+          <input type="submit" onClick={handleSubmit} value="전송" />
+        </div>
       </form>
 
     </div>

@@ -16,6 +16,7 @@
     // 상단 친구 정보
     .user_info{
         background-color: white;
+        border-bottom: lightgray solid 0.5px;
         padding: 10px;
         display: flex;
         flex-direction: row;
@@ -26,13 +27,91 @@
             border-radius: 20px;
         }
     }
+
     // 하단 글 작성 부분
     .send{
         margin-top: auto;
         background-color: white;
-        padding: 10px;
-        input {
-            flex-direction: row;
+
+        .send_setting {
+            background-color: rgb(245, 245, 245);
+            padding: 10px;
+            border-top: lightgray solid 0.5px;
+            border-bottom: lightgray solid 0.5px;
+            
+            .toggle {
+                position: relative;
+                display: inline-block;
+                width: 30px;
+                height: 18px;
+                input { 
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                    &:checked + .slider {
+                        background-color: #ccc;
+                    }
+                    
+                    &:focus + .slider {
+                        box-shadow: 0 0 1px #ccc;
+                    }
+                    
+                    &:checked + .slider:before {
+                        -webkit-transform: translateX(-12px);
+                        -ms-transform: translateX(-12px);
+                        transform: translateX(-12px);
+                    }
+                }
+            }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                border-radius: 34px;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgb(255, 247, 0);
+                -webkit-transition: .4s;
+                transition: .4s;
+                &:before {
+                    position: absolute;
+                    content: "";
+                    border-radius: 50%;
+                    height: 14px;
+                    width: 14px;
+                    left: 14px;
+                    bottom: 2px;
+                    background-color: white;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+            }
+        }
+
+        .send_write {
+            height: 80px;
+            display: flex;
+            align-items: flex-start;
+            textarea {
+                width: 210px;
+                height: 66px;
+                border: none; 
+                resize: none;
+                padding: 7px;
+                &:focus{
+                    outline: none;
+                }
+            }
+            input {
+                width: 78px;
+                height: 65px;
+                margin: 7px;
+                background-color: rgb(245, 245, 245);
+                border: solid 1px lightgray;
+                border-radius: 5px;
+                color: gray;
+            }
         }
     }
 }
