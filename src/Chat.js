@@ -99,7 +99,8 @@ function Chat(props) {
         {/* sender 셋팅, 사진 업로드 기능 */}
         <div className="send_setting">
 
-          <input type="file" accept="image/jpeg, image/jpg, image/png"
+          <input className="file-input"
+            type="file" accept="image/jpeg, image/jpg, image/png"
             onChange={handleSendPic}
           />
 

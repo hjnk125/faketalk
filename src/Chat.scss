@@ -34,12 +34,14 @@
         background-color: white;
 
         .send_setting {
+            display: flex;
             background-color: rgb(245, 245, 245);
             padding: 10px;
             border-top: lightgray solid 0.5px;
             border-bottom: lightgray solid 0.5px;
             
             .toggle {
+                margin-left: auto;
                 position: relative;
                 display: inline-block;
                 width: 30px;
@@ -196,6 +198,25 @@ li {
 
 .chat_pic {
     width: 160px;
-    border-radius: 2px;
     padding-top: 4px;
+}
+
+
+
+
+.file-input{
+    color: gray;
+    &::-webkit-file-upload-button {
+        display: none;
+    }
+    &::before {
+        content: '📎';
+        display: inline-block;
+        border: none;
+        padding: 0px 8px;
+        outline: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: pointer;
+    }
 }
