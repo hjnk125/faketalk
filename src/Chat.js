@@ -26,29 +26,41 @@ function Chat(props) {
     };
 
 
-    // 새 톡 내용을 배열에 추가
-    // [["user", "내 톡 내용(노랑 말풍선)", "시간"], ["friend", "친구 톡 내용(흰 말풍선)", "시간"]]
-    let tuple = [sender, newTalk, timestamp];
-    newTalks.push(tuple);
-    if (newTalks[newTalks.length - 2]) {
-      // 1분 아직 안 지났으면 마지막 시간만 남도록!
-      if (newTalks[newTalks.length - 2][0] === newTalks[newTalks.length - 1][0] && newTalks[newTalks.length - 2][2] === timestamp) {
-        newTalks[newTalks.length - 2][2] = "";
+    // 새 톡 내용을 배열에 추가(글이 있을 때)
+    if (newTalk !== "") {
+      // [["user", "내 톡 내용(노랑 말풍선)", "시간"], ["friend", "친구 톡 내용(흰 말풍선)", "시간"]]
+      let tuple = [sender, newTalk, timestamp];
+      newTalks.push(tuple);
+      if (newTalks[newTalks.length - 2]) {
+        // 1분 아직 안 지났으면 마지막 시간만 남도록!
+        if (newTalks[newTalks.length - 2][0] === newTalks[newTalks.length - 1][0] && newTalks[newTalks.length - 2][2] === timestamp) {
+          newTalks[newTalks.length - 2][2] = "";
+        }
+        // 첫 톡인 경우 배열 '2'번째 요소로 "first" 문자열 추가
+        if (newTalks[newTalks.length - 2][2] !== '') {
+          newTalks[newTalks.length - 1].push("first");
+        }
       }
-      // 첫 톡인 경우 배열 '2'번째 요소로 "first" 문자열 추가
-      if (newTalks[newTalks.length - 2][2] !== '') {
+      if (newTalks.length === 1) {
         newTalks[newTalks.length - 1].push("first");
       }
+      setTalks(newTalks);
+      console.log(newTalks);
     }
-    if (newTalks.length === 1) {
-      newTalks[newTalks.length - 1].push("first");
-    }
-    setTalks(newTalks);
-    console.log(newTalks);
+    // textarea 글자 지우기
+    e.target.previousSibling.value = "";
   }
 
   function handleSender() {
     (sender === "user") ? setSender("friend") : setSender("user");
+  };
+
+  function handleSendPic(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => setNewTalk(reader.result);
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -70,7 +82,10 @@ function Chat(props) {
               <div className="texts">
                 <span className={(talk[3] === "first") ? "name" : "none"}>{name}</span>
                 <div className="bubble_time">
-                  <span className="bubble">{talk[1]}</span>
+                  <span className="bubble">{
+                    (talk[1].slice(0, 4) !== "data") ?
+                      talk[1] : (<img className="chat_pic" src={talk[1]}></img>)
+                  }</span>
                   <span className="time">{talk[2]}</span>
                 </div>
               </div>
@@ -83,6 +98,11 @@ function Chat(props) {
 
         {/* sender 셋팅, 사진 업로드 기능 */}
         <div className="send_setting">
+
+          <input type="file" accept="image/jpeg, image/jpg, image/png"
+            onChange={handleSendPic}
+          />
+
           <label className="toggle">
             <input type="checkbox" onClick={handleSender} />
             <span className="slider"></span>

@@ -22,7 +22,7 @@ function Setting(props) {
       </div>
       <div className="profile_pic">
         <div>프로필 사진 변경:</div>
-        <input type="file" accept="image/jpeg, image/jpg"
+        <input type="file" accept="image/jpeg, image/jpg, image/png"
           onChange={(e) => setPic(handleFileOnChange(e))}
         />
       </div>
