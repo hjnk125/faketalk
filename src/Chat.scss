@@ -35,6 +35,7 @@
 
         .send_setting {
             display: flex;
+            align-items: center;
             background-color: rgb(245, 245, 245);
             padding: 10px;
             border-top: lightgray solid 0.5px;
@@ -42,20 +43,19 @@
             
             .toggle {
                 margin-left: auto;
+                margin-top: 3px;
                 position: relative;
                 display: inline-block;
-                width: 30px;
-                height: 18px;
+                width: 35px;
+                height: 20px;
+                box-shadow: rgb(200, 200, 200) 0px 0px 2px;
+                border-radius: 34px;
                 input { 
                     opacity: 0;
                     width: 0;
                     height: 0;
                     &:checked + .slider {
                         background-color: #ccc;
-                    }
-                    
-                    &:focus + .slider {
-                        box-shadow: 0 0 1px #ccc;
                     }
                     
                     &:checked + .slider:before {
@@ -79,14 +79,32 @@
                 &:before {
                     position: absolute;
                     content: "";
+                    box-shadow: rgb(200, 200, 200) 0px 0px 2px;
                     border-radius: 50%;
-                    height: 14px;
-                    width: 14px;
-                    left: 14px;
+                    height: 16px;
+                    width: 16px;
+                    left: 15px;
                     bottom: 2px;
                     background-color: white;
                     -webkit-transition: .4s;
                     transition: .4s;
+                }
+            }
+
+            .file-input{
+                color: gray;
+                &::-webkit-file-upload-button {
+                    display: none;
+                }
+                &::before {
+                    content: '📎';
+                    display: inline-block;
+                    border: none;
+                    padding: 0px 8px;
+                    outline: none;
+                    white-space: nowrap;
+                    -webkit-user-select: none;
+                    cursor: pointer;
                 }
             }
         }
@@ -204,19 +222,3 @@ li {
 
 
 
-.file-input{
-    color: gray;
-    &::-webkit-file-upload-button {
-        display: none;
-    }
-    &::before {
-        content: '📎';
-        display: inline-block;
-        border: none;
-        padding: 0px 8px;
-        outline: none;
-        white-space: nowrap;
-        -webkit-user-select: none;
-        cursor: pointer;
-    }
-}
